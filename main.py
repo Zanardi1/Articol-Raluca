@@ -32,12 +32,13 @@ def step_8():
 
 def step_9():
     c3_composition = 0.705  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
-    return c3_composition * step_7()
+    return c3_composition * step_7(), step_7() - c3_composition * step_7()
 
 
 def step_10():
-    c4_composition = 0.505  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
-    return c4_composition * step_8()
+    butene_composition = 0.505  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    butane_composition = 0.125  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    return butene_composition * step_8(), butane_composition * step_8(), step_8() - butene_composition * step_8() - butane_composition * step_8()
 
 
 def step_11():
