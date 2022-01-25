@@ -1,0 +1,5 @@
+#Conversia in benzina, parametrul de corelare, Randamentul de cocs, C2 si hidrocarburi usoare
+82 83.2 9
+80 90 7
+80 75 11
+60 90 4

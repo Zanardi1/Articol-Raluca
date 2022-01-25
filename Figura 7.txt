@@ -1,0 +1,6 @@
+# Conversia in benzina, factorul de corelare, Raportul dintre cantitatea de cocs si cantitatea de cocs, C2 si hidrocarburi usoare
+82 83.2 0.675
+82 90 0.64
+82 75 0.61
+82 60 0.75
+80 90 0.64

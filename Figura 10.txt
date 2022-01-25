@@ -1,0 +1,6 @@
+#Conversia in benzina, factorul de corelare, Randamentul de ulei, in % volumice
+82 83.2 1.15
+82 90 0.9
+82 75 1.4
+82 60 1.7
+80 90 0.88

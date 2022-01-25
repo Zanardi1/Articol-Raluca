@@ -1,0 +1,6 @@
+# Conversia in benzina, factorul de corelare, Densitatea benzinei
+82 83.2 58.5
+82 60 54
+82 75 56.5
+82 90 61
+80 60 54.1
