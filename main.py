@@ -1,42 +1,63 @@
+from numpy import loadtxt
+from scipy.interpolate import interp1d
+
+
 def step_1():
     return 75 - 0.065 * VABP - 0.9 * S + 0.6 * AP - 0.26 * (AP / SG)
 
 
 def step_2():
-    return 92.5  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    data = loadtxt('Figura 1.txt')
+    return 92.5  # Valoare luata din figura 1. Sa vad discretizez acel grafic
 
 
-def step_3():
-    return 0.68  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+def step_3(corr_factor):
+    data = loadtxt('Figura 2.txt')
+    x = data[:, 0]
+    y = data[:, 1]
+    f = interp1d(x, y)
+    return f(corr_factor)
 
 
 def step_4():
-    return step_2() * step_3()
+    return step_2() * step_3(correlation_factor)
 
 
 def step_5():
     return step_2() - step_4()
 
 
-def step_6():
-    return 1.69  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+def step_6(corr_factor):
+    data = loadtxt('Figura 3.txt')
+    x = data[:, 0]
+    y = data[:, 1]
+    f = interp1d(x, y)
+    return f(corr_factor)
 
 
 def step_7():
-    return step_5() / (1 + step_6())
+    return step_5() / (1 + step_6(correlation_factor))
 
 
 def step_8():
     return step_5() - step_7()
 
 
-def step_9():
-    c3_composition = 0.705  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+def step_9(corr_factor):
+    data = loadtxt('Figura 4.txt')
+    x = data[:, 0]
+    y = data[:, 1]
+    f = interp1d(x, y)
+    c3_composition = f(corr_factor)  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
     return c3_composition * step_7(), step_7() - c3_composition * step_7()
 
 
-def step_10():
-    butene_composition = 0.505  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+def step_10(corr_factor):
+    data = loadtxt('Figura 5.txt')
+    x = data[:, 0]
+    y = data[:, 1]
+    f = interp1d(x, y)
+    butene_composition = f(corr_factor)
     butane_composition = 0.125  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
     return butene_composition * step_8(), butane_composition * step_8(), step_8() - butene_composition * step_8() - butane_composition * step_8()
 
@@ -61,8 +82,13 @@ def step_15():
     pass  # De vazut cum sa fac acest pas
 
 
-def step_16():
-    return S * 0.34  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+def step_16(corr_factor):
+    data = loadtxt('Figura 8.txt')
+    x = data[:, 0]
+    y = data[:, 1]
+    f = interp1d(x, y)
+    randament = f(corr_factor)
+    return S * randament
 
 
 def step_17():
@@ -108,22 +134,23 @@ S = 0.8
 conversion_level = 82
 decant = 5
 
-print('Factorul de corelare: ', step_1())
+correlation_factor = step_1()
+print('Factorul de corelare: ', correlation_factor)
 print('Randamentul de C3 la 400F, in % volumice: ', step_2())
-print('Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F: ', step_3())
+print('Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F: ', step_3(correlation_factor))
 print('Randamentul de C5 la 400F, in % volumice: ', step_4())
 print('Randamentul de C3+C4 la 400F, in % volumice: ', step_5())
-print('Raportul dintre cantitiatea totala de C4 si cantitatea totala de C3: ', step_6())
+print('Raportul dintre cantitiatea totala de C4 si cantitatea totala de C3: ', step_6(correlation_factor))
 print('Randamentul total de C3, in % volumice: ', step_7())
 print('Randamentul total de C4, in % volumice: ', step_8())
-print('Randamentul de propena, in % volumice: ', step_9())
-print('Randamentul de butena, in % volumice: ', step_10())
+print('Randamentul de propena, in % volumice: ', step_9(correlation_factor))
+print('Randamentul de butena, in % volumice: ', step_10(correlation_factor))
 print('Randamentul de cocs, C2 si hidrocarburi usoare: ', step_11())
 print('Raportul dintre cantitatea de cocs si cantitatea de cocs, C2 si hidrocarburi usoare: ', step_12())
 print('Randamentul de cocs, in % volumice: ', step_13())
 print('Randamentul de C2 si hidrocarburi usoare, in % volumice: ', step_14())
 print('De lucrat la pasul 15')
-print('Raportul de H2S, in % volumice: ', step_16())
+print('Raportul de H2S, in % volumice: ', step_16(correlation_factor))
 print('Cantitatea de benzina, in % masice: ', step_17())
 print('Randamentul de ulei, in % volumice: ', step_18() + 1.15)
 print('Randamentul de ulei usor, in % volumice: ', step_19())

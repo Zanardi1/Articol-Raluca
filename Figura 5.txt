@@ -1,0 +1,4 @@
+# Coeficientul de corelare, Randamentul de butena, in % volumice
+45 0.44
+82.5 0.505
+95 0.53

@@ -1,0 +1,3 @@
+#Coeficientul de corelare, Randamentul de propena, in % volumice
+82.5 0.705
+90 0.715

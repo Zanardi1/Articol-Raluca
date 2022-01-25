@@ -1,0 +1,3 @@
+#Factor de corelare, Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F
+82.5 0.68
+100 0.56
