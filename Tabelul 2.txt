@@ -1,0 +1,6 @@
+#Component, bazat pe medie (% masa)
+Hidrogen 1.7
+Metan 41.3
+Etena 23
+Etan 34
+Total 100

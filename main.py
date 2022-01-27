@@ -11,8 +11,7 @@ def step_2(conv_level, corr_fact):
     inputs = data[:, :2]
     outputs = data[:, 2]
     interp = LinearNDInterpolator(inputs, outputs)
-    y = interp(conv_level, corr_fact)
-    return y
+    return interp(conv_level, corr_fact)
 
 
 def step_3(corr_factor):
@@ -52,7 +51,7 @@ def step_9(corr_factor):
     x = data[:, 0]
     y = data[:, 1]
     f = interp1d(x, y)
-    c3_composition = f(corr_factor)  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    c3_composition = f(corr_factor)
     return c3_composition * step_7(), step_7() - c3_composition * step_7()
 
 
@@ -63,7 +62,8 @@ def step_10(corr_factor):
     f = interp1d(x, y)
     butene_composition = f(corr_factor)
     butane_composition = 0.125  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
-    return butene_composition * step_8(), butane_composition * step_8(), step_8() - butene_composition * step_8() - butane_composition * step_8()
+    return butene_composition * step_8(), butane_composition * step_8(), step_8() - step_8() * (
+            butene_composition + butane_composition)
 
 
 def step_11(conv_level, corr_fact):
@@ -71,8 +71,7 @@ def step_11(conv_level, corr_fact):
     inputs = data[:, :2]
     outputs = data[:, 2]
     interp = LinearNDInterpolator(inputs, outputs)
-    y = interp(conv_level, corr_fact)
-    return y  # 9  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    return interp(conv_level, corr_fact)
 
 
 def step_12(conv_level, corr_fact):
@@ -80,8 +79,7 @@ def step_12(conv_level, corr_fact):
     inputs = data[:, :2]
     outputs = data[:, 2]
     interp = LinearNDInterpolator(inputs, outputs)
-    y = interp(conv_level, corr_fact)
-    return y  # 0.675  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    return interp(conv_level, corr_fact)
 
 
 def step_13():
@@ -93,7 +91,18 @@ def step_14():
 
 
 def step_15():
-    pass  # De vazut cum sa fac acest pas
+    names = []
+    avg = []
+    feed = []
+    total = round(step_14(), 2)
+    with open('Tabelul 2.txt', 'r') as f:
+        for line in f:
+            if "#" not in line:
+                names.append(line.split()[0])
+                avg.append(float(line.split()[1]))
+    for i in range(len(names)):
+        feed.append(round(avg[i] * total / avg[len(avg) - 1], 2))
+    return feed
 
 
 def step_16(corr_factor):
@@ -101,8 +110,7 @@ def step_16(corr_factor):
     x = data[:, 0]
     y = data[:, 1]
     f = interp1d(x, y)
-    randament = f(corr_factor)
-    return S * randament
+    return S * f(corr_factor)
 
 
 def step_17(conv_level, corr_fact):
@@ -123,8 +131,7 @@ def factor(conv_level, corr_fact):
     inputs = data[:, :2]
     outputs = data[:, 2]
     interp = LinearNDInterpolator(inputs, outputs)
-    y = interp(conv_level, corr_fact)
-    return y
+    return interp(conv_level, corr_fact)
 
 
 def step_19():
@@ -139,8 +146,7 @@ def step_20(conv_level, corr_fact):
     API = interp(conv_level, corr_fact)
     light_cycle_API = 25.8 - API
     light_cycle_SG = 141.5 / (light_cycle_API + 131.5)
-    return step_19() * (
-            light_cycle_SG / SG)  # Valoarea 0.9309 e luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
+    return step_19() * (light_cycle_SG / SG)
 
 
 def step_21():
@@ -149,7 +155,20 @@ def step_21():
 
 
 def step_22():
-    pass
+    component = ['Hidrogen', 'Metan', 'Etena', 'Etan', 'Propena', 'Propan', 'Butena', 'Izobutena', 'Butan', 'C5',
+                 'Ulei usor', 'Ulei de decantare', 'Cocs', 'H2S', 'Total']
+    vol = calc = normalized = [0] * len(component)
+    SG = [0.0] * 4 + [0.522, 0.5077, 0.6013, 0.5631, 0.5844, 0.7447, 0.9309, 1.0255] + [0.0] * 2 + [0.8996]
+    vol[4] = propene_yield
+    vol[5] = propane_yield
+    vol[6] = butene_yield
+    vol[7] = isobutane_yield
+    vol[8] = butane_yield
+    vol[9] = step_4()
+    vol[10] = step_19()
+    vol[11] = decant
+    vol[14] = sum(vol[i] for i in range(len(vol) - 1))
+    print(vol)
 
 
 def step_23():
@@ -176,19 +195,31 @@ print('Randamentul de C3+C4 la 400F, in % volumice: ', step_5())
 print('Raportul dintre cantitiatea totala de C4 si cantitatea totala de C3: ', step_6(correlation_factor))
 print('Randamentul total de C3, in % volumice: ', step_7())
 print('Randamentul total de C4, in % volumice: ', step_8())
-print('Randamentul de propena, in % volumice: ', step_9(correlation_factor))
-print('Randamentul de butena, in % volumice: ', step_10(correlation_factor))
+propene_yield, propane_yield = step_9(corr_factor=correlation_factor)
+print('Randamentul de propena, in % volumice: ', propene_yield)
+print('Randamentul de C3, mai putin propena: ', propane_yield)
+butene_yield, butane_yield, isobutane_yield = step_10(corr_factor=correlation_factor)
+print('Randamentul de butena, in % volumice: ', butene_yield)
+print('Randamentul de butan, in % volumice: ', butane_yield)
+print('Randamentul de izobutan, in %volumice: ', isobutane_yield)
 print('Randamentul de cocs, C2 si hidrocarburi usoare: ', step_11(conversion_level, correlation_factor))
 print('Raportul dintre cantitatea de cocs si cantitatea de cocs, C2 si hidrocarburi usoare: ',
       step_12(conversion_level, correlation_factor))
 print('Randamentul de cocs, in % volumice: ', step_13())
 print('Randamentul de C2 si hidrocarburi usoare, in % volumice: ', step_14())
-print('De lucrat la pasul 15')
+alimentare = step_15()
+print('Alimentarea cu hidrogen: ', alimentare[0])
+print('Alimentarea cu metan: ', alimentare[1])
+print('Alimentarea cu etena: ', alimentare[2])
+print('Alimentarea cu etan:', alimentare[3])
+print('Total in alimentare: ', alimentare[4])
 print('Raportul de H2S, in % volumice: ', step_16(correlation_factor))
 print('Cantitatea de benzina, in % masice: ', step_17(conversion_level, correlation_factor))
 print('Randamentul de ulei, in % volumice: ', step_18() + factor(conversion_level, correlation_factor))
 print('Randamentul de ulei usor, in % volumice: ', step_19())
 print('Randamentul de ulei usor, in % masice: ', step_20(conversion_level, correlation_factor))
 print('Greutatea specifica e uleiului decantat: ', step_21())
-print('De rezolvat pasii 22 si 23')
-print('Cifrele octanice: ', step_24())
+print('De rezolvat pasii 22 si 23', step_22())
+COM, COR = step_24()
+print('COM: ', COM)
+print('COR: ', COR)
