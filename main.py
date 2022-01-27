@@ -144,7 +144,8 @@ def step_20(conv_level, corr_fact):
 
 
 def step_21():
-    return SG * (step_18() - step_20(conversion_level, correlation_factor) / decant)
+    return SG * ((step_18() + factor(conversion_level, correlation_factor) - step_20(conversion_level,
+                                                                                     correlation_factor)) / decant)
 
 
 def step_22():
