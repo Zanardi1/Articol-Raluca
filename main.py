@@ -157,8 +157,10 @@ def step_21():
 def step_22():
     component = ['Hidrogen', 'Metan', 'Etena', 'Etan', 'Propena', 'Propan', 'Butena', 'Izobutena', 'Butan', 'C5',
                  'Ulei usor', 'Ulei de decantare', 'Cocs', 'H2S', 'Total']
-    vol = calc = normalized = [0] * len(component)
-    SG = [0.0] * 4 + [0.522, 0.5077, 0.6013, 0.5631, 0.5844, 0.7447, 0.9309, 1.0255] + [0.0] * 2 + [0.8996]
+    vol = [0] * len(component)
+    calc = [0] * len(component)
+    normalized = [0] * len(component)
+    specific_gravity = [0.0] * 4 + [0.522, 0.5077, 0.6013, 0.5631, 0.5844, 0.7447, 0.9309, 1.0255] + [0.0] * 3
     vol[4] = propene_yield
     vol[5] = propane_yield
     vol[6] = butene_yield
@@ -168,7 +170,22 @@ def step_22():
     vol[10] = step_19()
     vol[11] = decant
     vol[14] = sum(vol[i] for i in range(len(vol) - 1))
-    print(vol)
+    specific_gravity[14] = sum(specific_gravity[i] * vol[i] for i in range(len(vol) - 1)) / 100
+    for i in range(4):
+        calc[i] = alimentare[i]
+    for i in range(4, 9):
+        calc[i] = vol[i] * specific_gravity[i]
+    calc[9] = step_17(conv_level=conversion_level, corr_fact=correlation_factor)
+    calc[10] = step_20(conv_level=conversion_level, corr_fact=correlation_factor)
+    calc[11] = (step_18() + factor(conversion_level, correlation_factor) - step_20(conversion_level,
+                                                                                   correlation_factor))
+    calc[12] = step_13()
+    calc[13] = step_16(corr_factor=correlation_factor)
+    calc[14] = sum(calc[i] for i in range(len(calc) - 1))
+    for i in range(len(normalized) - 1):
+        normalized[i] = calc[i] * 100 / calc[14]
+    normalized[14] = sum(normalized[i] for i in range(len(normalized) - 1))
+    return calc, normalized
 
 
 def step_23():
