@@ -2,23 +2,33 @@ from numpy import loadtxt
 from scipy.interpolate import interp1d, LinearNDInterpolator
 
 
+def interp_1d(filename):
+    data = loadtxt(filename)
+    inputs = data[:, 0]
+    outputs = data[:, 1]
+    f = interp1d(inputs, outputs)
+    return f
+
+
+def interp_2d(filename):
+    data = loadtxt(filename)
+    inputs = data[:, :2]
+    outputs = data[:, 2]
+    interp = LinearNDInterpolator(inputs, outputs)
+    return interp
+
+
 def step_1():
     return 75 - 0.065 * VABP - 0.9 * S + 0.6 * AP - 0.26 * (AP / SG)
 
 
 def step_2(conv_level, corr_fact):
-    data = loadtxt('Figura 1.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
+    interp = interp_2d('Figura 1.txt')
     return interp(conv_level, corr_fact)
 
 
 def step_3(corr_factor):
-    data = loadtxt('Figura 2.txt')
-    x = data[:, 0]
-    y = data[:, 1]
-    f = interp1d(x, y)
+    f = interp_1d('Figura 2.txt')
     return f(corr_factor)
 
 
@@ -31,10 +41,7 @@ def step_5():
 
 
 def step_6(corr_factor):
-    data = loadtxt('Figura 3.txt')
-    x = data[:, 0]
-    y = data[:, 1]
-    f = interp1d(x, y)
+    f = interp_1d('Figura 3.txt')
     return f(corr_factor)
 
 
@@ -47,19 +54,13 @@ def step_8():
 
 
 def step_9(corr_factor):
-    data = loadtxt('Figura 4.txt')
-    x = data[:, 0]
-    y = data[:, 1]
-    f = interp1d(x, y)
+    f = interp_1d('Figura 4.txt')
     c3_composition = f(corr_factor)
     return c3_composition * step_7(), step_7() - c3_composition * step_7()
 
 
 def step_10(corr_factor):
-    data = loadtxt('Figura 5.txt')
-    x = data[:, 0]
-    y = data[:, 1]
-    f = interp1d(x, y)
+    f = interp_1d('Figura 5.txt')
     butene_composition = f(corr_factor)
     butane_composition = 0.125  # Valoare luata dintr-un grafic. Sa vad daca pot discretiza graficul respectiv
     return butene_composition * step_8(), butane_composition * step_8(), step_8() - step_8() * (
@@ -67,18 +68,12 @@ def step_10(corr_factor):
 
 
 def step_11(conv_level, corr_fact):
-    data = loadtxt('Figura 6.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
+    interp = interp_2d('Figura 6.txt')
     return interp(conv_level, corr_fact)
 
 
 def step_12(conv_level, corr_fact):
-    data = loadtxt('Figura 7.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
+    interp = interp_2d('Figura 7.txt')
     return interp(conv_level, corr_fact)
 
 
@@ -106,18 +101,12 @@ def step_15():
 
 
 def step_16(corr_factor):
-    data = loadtxt('Figura 8.txt')
-    x = data[:, 0]
-    y = data[:, 1]
-    f = interp1d(x, y)
+    f = interp_1d('Figura 8.txt')
     return S * f(corr_factor)
 
 
 def step_17(conv_level, corr_fact):
-    data = loadtxt('Figura 9.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    API = LinearNDInterpolator(inputs, outputs)
+    API = interp_2d('Figura 9.txt')
     gasoline_gravity = 141.5 / (API(conv_level, corr_fact) + 131.5)
     return step_4() * (gasoline_gravity / SG)
 
@@ -127,10 +116,7 @@ def step_18():
 
 
 def factor(conv_level, corr_fact):
-    data = loadtxt('Figura 10.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
+    interp = interp_2d('Figura 10.txt')
     return interp(conv_level, corr_fact)
 
 
@@ -139,10 +125,7 @@ def step_19():
 
 
 def step_20(conv_level, corr_fact):
-    data = loadtxt('Figura 11.txt')
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
+    interp = interp_2d('Figura 11.txt')
     API = interp(conv_level, corr_fact)
     light_cycle_API = 25.8 - API
     light_cycle_SG = 141.5 / (light_cycle_API + 131.5)
@@ -157,9 +140,9 @@ def step_21():
 def step_22():
     component = ['Hidrogen', 'Metan', 'Etena', 'Etan', 'Propena', 'Propan', 'Butena', 'Izobutena', 'Butan', 'C5',
                  'Ulei usor', 'Ulei de decantare', 'Cocs', 'H2S', 'Total']
-    vol = [0] * len(component)
-    calc = [0] * len(component)
-    normalized = [0] * len(component)
+    vol = [0.0] * len(component)
+    calc = [0.0] * len(component)
+    normalized = [0.0] * len(component)
     specific_gravity = [0.0] * 4 + [0.522, 0.5077, 0.6013, 0.5631, 0.5844, 0.7447, 0.9309, 1.0255] + [0.0] * 3
     vol[4] = propene_yield
     vol[5] = propane_yield
@@ -189,13 +172,52 @@ def step_22():
 
 
 def step_23():
-    pass
+    component = ['Benzina', 'Ulei usor', 'Ulei de decantare', 'Cocs', 'Total', 'Sulf in H2S', 'Total sulf']
+    feed_rate = feed * 7.491 * 42 / 24
+    sulfur_in_feed = feed_rate * S / 100
+    H2S_yield = feed_rate * step_16(corr_factor=correlation_factor) / 100
+    sulfur_in_H2S = H2S_yield * 32 / 34
+    yield_wt = [0.0] * len(component)
+    yield_lb_h = [0.0] * len(component)
+    calc_wt = [0.1, 1, 2.5, 2.5]
+    calc_lb_h = [0.0] * len(component)
+    normalized_wt = [0.0] * len(component)
+    normalized_lb_h = [0.0] * len(component)
+    for i in range(4):
+        yield_wt[i] = calculated_values[i + 9]
+        yield_lb_h[i] = feed_rate * yield_wt[i] / 100
+        calc_lb_h[i] = yield_lb_h[i] * calc_wt[i] / 100
+    yield_wt[4] = sum(yield_wt[i] for i in range(4))
+    yield_lb_h[4] = sum(yield_lb_h[i] for i in range(4))
+    calc_lb_h[4] = sum(calc_lb_h[i] for i in range(4))
+    normalized_lb_h[5] = sulfur_in_H2S
+    normalized_lb_h[6] = sulfur_in_feed
+    normalized_lb_h[4] = normalized_lb_h[6] - normalized_lb_h[5]
+    for i in range(4):
+        normalized_wt[i] = calc_wt[i] * normalized_lb_h[4] / calc_lb_h[4]
+        normalized_lb_h[i] = calc_lb_h[i] * normalized_lb_h[4] / calc_lb_h[4]
+    return yield_wt, yield_lb_h, calc_wt, calc_lb_h, normalized_wt, normalized_lb_h
+
+
+def compute_MON(corr_level, corr_fact):
+    interp = interp_2d('Figura 12.txt')
+    y = interp(corr_level, corr_fact)
+    return y
+
+
+def compute_RON(corr_level, corr_fact):
+    interp = interp_2d('Figura 13.txt')
+    y = interp(corr_level, corr_fact)
+    return y
 
 
 def step_24():
-    return 81, 92.2  # Valori luate din grafice. Sa vad daca le pot discretiza
+    return compute_MON(corr_level=conversion_level,
+                       corr_fact=correlation_factor), compute_RON(corr_level=conversion_level,
+                                                                  corr_fact=correlation_factor)  # Valori luate din grafice. Sa vad daca le pot discretiza
 
 
+feed = 7500
 VABP = 700
 SG = 0.8996
 AP = 175
@@ -236,7 +258,16 @@ print('Randamentul de ulei, in % volumice: ', step_18() + factor(conversion_leve
 print('Randamentul de ulei usor, in % volumice: ', step_19())
 print('Randamentul de ulei usor, in % masice: ', step_20(conversion_level, correlation_factor))
 print('Greutatea specifica e uleiului decantat: ', step_21())
-print('De rezolvat pasii 22 si 23', step_22())
+calculated_values, normalized_values = step_22()
+print('Valori calculate: ', calculated_values)
+print('Valori normalizate: ', normalized_values)
+yield_wt, yield_lb_h, calc_wt, calc_lb_h, normalized_wt, normalized_lb_h = step_23()
+print('Randament, %masice: ', yield_wt)
+print('Randament, lb/h: ', yield_lb_h)
+print('Valori calculate, % masice: ', calc_wt)
+print('Valori calculate, lb/h: ', calc_lb_h)
+print('Valori normalizate, %masice: ', normalized_wt)
+print('Valori normalizate, lb/h: ', normalized_lb_h)
 COM, COR = step_24()
 print('COM: ', COM)
 print('COR: ', COR)

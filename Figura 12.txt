@@ -1,0 +1,5 @@
+#Conversia in benzina, factorul de corelare, COM
+40 90 77.5
+82 83.2 81
+82 90 80.5
+82 60 83
