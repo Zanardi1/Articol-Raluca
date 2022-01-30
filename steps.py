@@ -74,7 +74,7 @@ def step_15():
     names, avg = b.read_table_2()
     for i in range(len(names)):
         feed.append(round(avg[i] * total / avg[len(avg) - 1], 2))
-    return feed
+    return names, avg, feed
 
 
 def step_16(corr_factor):
@@ -116,7 +116,7 @@ def step_22():
     specific_gravity = b.compute_specific_gravity(vol)
     calc = b.compute_calc(len(component), vol=vol, specific_gravity=specific_gravity)
     normalized = b.compute_normalized(len(component), calc=calc)
-    return calc, normalized
+    return component, vol, specific_gravity, calc, normalized
 
 
 def step_23():
@@ -135,7 +135,7 @@ def step_23():
     normalized_wt = b.compute_normalized_wt(len(component), calc_wt=calc_wt, normalized_lb_h=normalized_lb_h,
                                             calc_lb_h=calc_lb_h)
 
-    return yield_wt, yield_lb_h, calc_wt, calc_lb_h, normalized_wt, normalized_lb_h
+    return component, yield_wt, yield_lb_h, calc_wt, calc_lb_h, normalized_wt, normalized_lb_h
 
 
 def step_24():

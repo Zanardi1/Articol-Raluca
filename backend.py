@@ -27,6 +27,8 @@ coke_c2_light_yield = 0
 coke_total_coke_c2_light_yield = 0
 coke_yield = 0
 c2_light_yield = 0
+nume = [0] * 5
+avg = [0] * 5
 alimentare = [0] * 5
 h2s_yield = 0
 gasoline_yield = 0
@@ -34,8 +36,12 @@ oil_yield = 0
 light_oil_yield_volume = 0
 light_oil_yield_mass = 0
 decant_oil_SPG = 0
+component = []
+vol = []
+specific_gravity = []
 calculated_values = 0
 normalized_values = 0
+component_table_4 = []
 yield_wt = 0
 yield_lb_h = 0
 calc_wt = 0
@@ -151,7 +157,7 @@ def compute_yield_lb_h(list_length, feed_rate, yield_wt):
 
 
 def compute_calc_wt():
-    calc_wt = [0.1, 1, 2.5, 2.5]
+    calc_wt = [0.1, 1, 2.5, 2.5, 0, 0, 0]
     return calc_wt
 
 
@@ -178,3 +184,68 @@ def compute_normalized_lb_h(list_length, sulfur_in_H2S, sulfur_in_feed, calc_lb_
     for i in range(4):
         normalized_lb_h[i] = calc_lb_h[i] * normalized_lb_h[4] / calc_lb_h[4]
     return normalized_lb_h
+
+
+def generate_non_tabular_content():
+    header = ['Marime', 'Valoare']
+    data = {'Factorul de corelare: ': correlation_factor,
+            'Randamentul de C3 la 400F, in % volumice: ': c3_yield,
+            'Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F: ': c5_c3_yield,
+            'Randamentul de C5 la 400F, in % volumice: ': c5_yield,
+            'Randamentul de C3+C4 la 400F, in % volumice: ': c3_c4_yield,
+            'Raportul dintre cantitatea totala de C4 si cantitatea totala de C3: ': c4_c3_yield,
+            'Randamentul total de C3, in % volumice: ': c3_total_yield,
+            'Randamentul total de C4, in % volumice: ': c4_total_yield,
+            'Randamentul de propena, in % volumice: ': propene_yield,
+            'Randamentul de C3, mai putin propena: ': propane_yield,
+            'Randamentul de butena, in % volumice: ': butene_yield,
+            'Randamentul de butan, in % volumice: ': butane_yield,
+            'Randamentul de izobutan, in %volumice: ': isobutane_yield,
+            'Randamentul de cocs, C2 si hidrocarburi usoare: ': coke_c2_light_yield,
+            'Raportul dintre cantitatea de cocs si cantitatea totala de cocs, C2 si hidrocarburi usoare: ': coke_total_coke_c2_light_yield,
+            'Randamentul de cocs, in % volumice: ': coke_yield,
+            'Randamentul de C2 si hidrocarburi usoare, in % volumice: ': c2_light_yield,
+            'Alimentarea cu hidrogen: ': alimentare[0],
+            'Alimentarea cu metan: ': alimentare[1],
+            'Alimentarea cu etena: ': alimentare[2],
+            'Alimentarea cu etan:': alimentare[3],
+            'Total in alimentare: ': alimentare[4],
+            'Raportul de H2S, in % volumice: ': h2s_yield,
+            'Cantitatea de benzina, in % masice: ': gasoline_yield,
+            'Randamentul de ulei, in % volumice: ': oil_yield,
+            'Randamentul de ulei usor, in % volumice: ': light_oil_yield_volume,
+            'Randamentul de ulei usor, in % masice: ': light_oil_yield_mass,
+            'Greutatea specifica e uleiului decantat: ': decant_oil_SPG,
+            'COM: ': COM,
+            'COR: ': COR}
+    return header, data
+
+
+def generate_table_2_content():
+    headers = ['Component', 'Bazat pe medie, % vol', 'Bazat pe alimentare, % masa']
+    table = []
+    for i in range(len(nume)):
+        table.append([nume[i], avg[i], alimentare[i]])
+    return headers, table
+
+
+def generate_table_3_content():
+    headers = ['Component', '% vol', 'Greutate specifica', 'Randament calculat (% masa)',
+               'Randament normalizat (%masa)']
+    table = []
+    for i in range(len(component)):
+        table.append(
+            [component[i], vol[i], specific_gravity[i], calculated_values[i], normalized_values[i]])
+    return headers, table
+
+
+def generate_table_4_content():
+    headers = ['Component', 'Randament (% masice)', 'Debit (lb/h)',
+               'Continutul calculat de sulf (% masice)',
+               'Debitul calculat de sulf (lb/h)', 'Continutul normalizat de sulf (% masice)',
+               'Debitul normalizat de sulf (lb/h)']
+    table = []
+    for i in range(len(component_table_4)):
+        table.append([component_table_4[i], yield_wt[i], yield_lb_h[i], calc_wt[i], calc_lb_h[i], normalized_wt[i],
+                      normalized_lb_h[i]])
+    return headers, table
