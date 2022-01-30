@@ -231,7 +231,7 @@ def generate_table_2_content():
 
 def generate_table_3_content():
     headers = ['Component', '% vol', 'Greutate specifica', 'Randament calculat (% masa)',
-               'Randament normalizat (%masa)']
+               'Randament normalizat (% masa)']
     table = []
     for i in range(len(component)):
         table.append(
@@ -240,10 +240,7 @@ def generate_table_3_content():
 
 
 def generate_table_4_content():
-    headers = ['Component', 'Randament (% masice)', 'Debit (lb/h)',
-               'Continutul calculat de sulf (% masice)',
-               'Debitul calculat de sulf (lb/h)', 'Continutul normalizat de sulf (% masice)',
-               'Debitul normalizat de sulf (lb/h)']
+    headers = ['Component', 'A', 'B', 'C', 'D', 'E', 'F']
     table = []
     for i in range(len(component_table_4)):
         table.append([component_table_4[i], yield_wt[i], yield_lb_h[i], calc_wt[i], calc_lb_h[i], normalized_wt[i],
