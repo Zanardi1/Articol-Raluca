@@ -2,14 +2,24 @@ from numpy import loadtxt
 from scipy.interpolate import interp1d, LinearNDInterpolator
 
 import steps as s
+import conversions as c
 
 
-def read_input_file():
-    data = loadtxt('Set 0.txt')
+def read_input_file(filename, is_new_file=True):
+    data = loadtxt(filename)
+    if is_new_file:
+        flow_rate = c.convert_tonnes_per_year_to_bpsd(data[0], data[5])
+        conv = data[1]
+        VABP = c.convert_c_to_f((data[2] + data[3] + data[4]) / 3)
+        FSG = data[5]
+        AP = data[6]
+        ISC = data[7]
+        data = [flow_rate, conv, VABP, FSG, AP, ISC]
     return data
 
 
-feed_rate, conversion_level, volumetric_average_boiling_point, initial_specific_gravity, aniline_point, initial_sulfur_content = read_input_file()
+feed_rate, conversion_level, volumetric_average_boiling_point, feed_specific_gravity, aniline_point, initial_sulfur_content = read_input_file(
+    is_new_file=True, filename='Set 1.txt')
 
 decant = 5
 correlation_factor = 0

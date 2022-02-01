@@ -86,7 +86,7 @@ def step_16(corr_factor):
 def step_17(conv_level, corr_fact):
     API = b.interp_2d('Figura 9.txt')
     gasoline_gravity = 141.5 / (API(conv_level, corr_fact) + 131.5)
-    return b.c5_yield * (gasoline_gravity / b.initial_specific_gravity)
+    return b.c5_yield * (gasoline_gravity / b.feed_specific_gravity)
 
 
 def step_18():
@@ -102,11 +102,11 @@ def step_20(conv_level, corr_fact):
     API = f(conv_level, corr_fact)
     light_cycle_API = 25.8 - API
     light_cycle_SG = c.convert_API_to_SG(light_cycle_API)
-    return b.light_oil_yield_volume * (light_cycle_SG / b.initial_specific_gravity)
+    return b.light_oil_yield_volume * (light_cycle_SG / b.feed_specific_gravity)
 
 
 def step_21():
-    return b.initial_specific_gravity * (
+    return b.feed_specific_gravity * (
             (step_18() + b.factor(b.conversion_level, b.correlation_factor) - b.light_oil_yield_mass) / b.decant)
 
 
