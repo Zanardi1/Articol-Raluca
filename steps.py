@@ -1,4 +1,5 @@
 import backend as b
+import conversions as c
 
 
 def step_1(VABP, S, AP, SG):
@@ -79,13 +80,13 @@ def step_15():
 
 def step_16(corr_factor):
     f = b.interp_1d('Figura 8.txt')
-    return b.S * f(corr_factor)
+    return b.initial_sulfur_content * f(corr_factor)
 
 
 def step_17(conv_level, corr_fact):
     API = b.interp_2d('Figura 9.txt')
     gasoline_gravity = 141.5 / (API(conv_level, corr_fact) + 131.5)
-    return b.c5_yield * (gasoline_gravity / b.SG)
+    return b.c5_yield * (gasoline_gravity / b.initial_specific_gravity)
 
 
 def step_18():
@@ -100,12 +101,13 @@ def step_20(conv_level, corr_fact):
     f = b.interp_2d('Figura 11.txt')
     API = f(conv_level, corr_fact)
     light_cycle_API = 25.8 - API
-    light_cycle_SG = 141.5 / (light_cycle_API + 131.5)
-    return b.light_oil_yield_volume * (light_cycle_SG / b.SG)
+    light_cycle_SG = c.convert_API_to_SG(light_cycle_API)
+    return b.light_oil_yield_volume * (light_cycle_SG / b.initial_specific_gravity)
 
 
 def step_21():
-    return b.SG * ((step_18() + b.factor(b.conversion_level, b.correlation_factor) - b.light_oil_yield_mass) / b.decant)
+    return b.initial_specific_gravity * (
+            (step_18() + b.factor(b.conversion_level, b.correlation_factor) - b.light_oil_yield_mass) / b.decant)
 
 
 def step_22():
@@ -121,8 +123,8 @@ def step_22():
 
 def step_23():
     component = ['Benzina', 'Ulei usor', 'Ulei de decantare', 'Cocs', 'Total', 'Sulf in H2S', 'Total sulf']
-    feed_rate = b.feed * 7.491 * 42 / 24
-    sulfur_in_feed = feed_rate * b.S / 100
+    feed_rate = b.feed_rate * 7.491 * 42 / 24
+    sulfur_in_feed = feed_rate * b.initial_sulfur_content / 100
     H2S_yield = feed_rate * step_16(corr_factor=b.correlation_factor) / 100
     sulfur_in_H2S = H2S_yield * 32 / 34
 

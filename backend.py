@@ -3,12 +3,14 @@ from scipy.interpolate import interp1d, LinearNDInterpolator
 
 import steps as s
 
-feed = 7500
-VABP = 700
-SG = 0.8996
-AP = 175
-S = 0.8
-conversion_level = 82
+
+def read_input_file():
+    data = loadtxt('Set 0.txt')
+    return data
+
+
+feed_rate, conversion_level, volumetric_average_boiling_point, initial_specific_gravity, aniline_point, initial_sulfur_content = read_input_file()
+
 decant = 5
 correlation_factor = 0
 c3_yield = 0

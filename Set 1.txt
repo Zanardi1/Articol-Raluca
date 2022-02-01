@@ -1,0 +1,16 @@
+#Debitul de alimentare (t/an)
+#Nivelul de conversie (% vol)
+#Temperatura la 10 grade pe curba de distilare (C)
+#Temperatura la 50 grade pe curba de distilare (C)
+#Temperatura la 90 grade pe curba de distilare (C)
+#Greutatea specifica
+#Punctul de anilina (F)
+#Continutul de S (% masa)
+1600000
+80
+330
+445
+550
+0.915
+190
+0.9

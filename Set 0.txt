@@ -1,0 +1,12 @@
+#Debitul de alimentare (bpsd)
+#Nivelul de conversie (% vol)
+#Punctul mediu de fierbere volumic (F)
+#Greutatea specifica
+#Punctul de anilina (F)
+#Continutul de S (% masa)
+7500
+82
+700
+0.8996
+175
+0.8

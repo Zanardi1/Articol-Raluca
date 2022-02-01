@@ -3,7 +3,8 @@ import steps as s
 
 
 def computing_engine():
-    b.correlation_factor = s.step_1(VABP=b.VABP, S=b.S, AP=b.AP, SG=b.SG)
+    b.correlation_factor = s.step_1(VABP=b.volumetric_average_boiling_point, S=b.initial_sulfur_content,
+                                    AP=b.aniline_point, SG=b.initial_specific_gravity)
     b.c3_yield = s.step_2(b.conversion_level, b.correlation_factor)
     b.c5_c3_yield = s.step_3(b.correlation_factor)
     b.c5_yield = s.step_4()
