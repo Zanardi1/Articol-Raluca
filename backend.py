@@ -10,11 +10,11 @@ def read_input_file(filename, is_new_file=True):
     if is_new_file:
         flow_rate = c.convert_tonnes_per_year_to_bpsd(data[0], data[5])
         conv = data[1]
-        VABP = c.convert_c_to_f((data[2] + data[3] + data[4]) / 3)
-        FSG = data[5]
-        AP = data[6]
-        ISC = data[7]
-        data = [flow_rate, conv, VABP, FSG, AP, ISC]
+        vabp = c.convert_c_to_f((data[2] + data[3] + data[4]) / 3)
+        fsg = data[5]
+        ap = data[6]
+        isc = data[7]
+        data = [flow_rate, conv, vabp, fsg, ap, isc]
     return data
 
 
@@ -51,15 +51,15 @@ decant_oil_SPG = 0
 component = []
 vol = []
 specific_gravity = []
-calculated_values = 0
-normalized_values = 0
+calculated_values = []
+normalized_values = []
 component_table_4 = []
-yield_wt = 0
-yield_lb_h = 0
-calc_wt = 0
-calc_lb_h = 0
-normalized_wt = 0
-normalized_lb_h = 0
+yield_wt = []
+yield_lb_h = []
+calc_wt = []
+calc_lb_h = []
+normalized_wt = []
+normalized_lb_h = []
 COM = 0
 COR = 0
 
@@ -80,13 +80,13 @@ def interp_2d(filename):
     return interp
 
 
-def compute_MON(corr_level, corr_fact):
+def compute_mon(corr_level, corr_fact):
     f = interp_2d('Figura 12.txt')
     y = f(corr_level, corr_fact)
     return y
 
 
-def compute_RON(corr_level, corr_fact):
+def compute_ron(corr_level, corr_fact):
     f = interp_2d('Figura 13.txt')
     y = f(corr_level, corr_fact)
     return y

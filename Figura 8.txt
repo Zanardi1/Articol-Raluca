@@ -1,3 +1,4 @@
 #Factorul de corelare, Raportul de H2S, in % volumice
 82.5 0.34
 95 0.28
+80 0.36

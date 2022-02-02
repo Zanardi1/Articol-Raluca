@@ -1,3 +1,4 @@
 #Factorul de corelare, Raportul dintre cantitiatea totala de C4 si cantitatea totala de C3
 83.2 1.69
 100 1.55
+80 1.71

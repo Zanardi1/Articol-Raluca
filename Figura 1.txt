@@ -1,5 +1,6 @@
 # Conversie in benzina, factor de corelare, fractie de C3 la 400 F
 82 83.2 92.5
 80 90 92.5
+80 80 87.5
 70 90 85
 89 90 100
