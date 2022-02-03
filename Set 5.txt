@@ -7,7 +7,7 @@
 #Punctul de anilina (F)
 #Continutul de S (% masa)
 1800000
-0.9
+82
 330
 450
 550
