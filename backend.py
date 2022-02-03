@@ -19,7 +19,7 @@ def read_input_file(filename, is_new_file=True):
 
 
 feed_rate, conversion_level, volumetric_average_boiling_point, feed_specific_gravity, aniline_point, initial_sulfur_content = read_input_file(
-    is_new_file=True, filename='Set 1.txt')
+    is_new_file=True, filename='Set 6.txt')
 
 decant = 5
 correlation_factor = 0

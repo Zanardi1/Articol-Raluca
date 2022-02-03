@@ -4,8 +4,9 @@ import tabulate as t
 
 def print_to_file():
     with open('Rezultate.txt', 'w') as f:
-        header, data = b.generate_inputs()
-        f.write(t.tabulate(tabular_data=data.items(), headers=header, tablefmt='github', floatfmt='.2f') + '\n\n')
+        header_input, data_input = b.generate_inputs()
+        f.write(t.tabulate(tabular_data=data_input.items(), headers=header_input, tablefmt='github',
+                           floatfmt='.2f') + '\n\n')
 
         header, data = b.generate_non_tabular_content()
         f.write(t.tabulate(tabular_data=data.items(), headers=header, tablefmt='github', floatfmt='.2f') + '\n\n')
