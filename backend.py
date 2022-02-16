@@ -19,7 +19,7 @@ def read_input_file(filename, is_new_file=True):
 
 
 feed_rate, conversion_level, volumetric_average_boiling_point, feed_specific_gravity, aniline_point, initial_sulfur_content = read_input_file(
-    is_new_file=True, filename='Set 6.txt')
+    is_new_file=True, filename='Set 3.txt')
 
 decant = 5
 correlation_factor = 0
@@ -199,7 +199,7 @@ def compute_normalized_lb_h(list_length, sulfur_in_H2S, sulfur_in_feed, calc_lb_
 
 
 def generate_inputs():
-    header = ['Proprietare', 'Valoare']
+    header = ['Proprietate', 'Valoare']
     data = {'Debitul de alimentare (t/an): ': feed_rate,
             'Nivelul de conversie (% vol): ': conversion_level,
             'Punctul mediu de fierbere volumica (F): ': volumetric_average_boiling_point,
