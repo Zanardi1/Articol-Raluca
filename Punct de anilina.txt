@@ -1,0 +1,7 @@
+#Temperatura de fierbere medie volumetrica (F) d15/15 Punct de anilina (F)
+838.94 0.915 190
+797 0.905 180
+797 0.91 190
+829.4 0.91 198
+811.4 0.91 192
+

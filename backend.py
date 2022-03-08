@@ -1,8 +1,24 @@
 from numpy import loadtxt
 from scipy.interpolate import interp1d, LinearNDInterpolator
 
-import steps as s
 import conversions as c
+import steps as s
+
+
+def interp_1d(filename):
+    data = loadtxt(filename)
+    inputs = data[:, 0]
+    outputs = data[:, 1]
+    f = interp1d(inputs, outputs)
+    return f
+
+
+def interp_2d(filename):
+    data = loadtxt(filename)
+    inputs = data[:, :2]
+    outputs = data[:, 2]
+    interp = LinearNDInterpolator(inputs, outputs)
+    return interp
 
 
 def read_input_file(filename, is_new_file=True):
@@ -12,7 +28,9 @@ def read_input_file(filename, is_new_file=True):
         conv = data[1]
         vabp = c.convert_c_to_f((data[2] + data[3] + data[4]) / 3)
         fsg = data[5]
-        ap = data[6]
+        # ap = data[6]
+        ap = interp_2d('Punct de anilina.txt')
+        ap = ap(vabp, fsg)
         isc = data[7]
         data = [flow_rate, conv, vabp, fsg, ap, isc]
     return data
@@ -62,22 +80,6 @@ normalized_wt = []
 normalized_lb_h = []
 COM = 0
 COR = 0
-
-
-def interp_1d(filename):
-    data = loadtxt(filename)
-    inputs = data[:, 0]
-    outputs = data[:, 1]
-    f = interp1d(inputs, outputs)
-    return f
-
-
-def interp_2d(filename):
-    data = loadtxt(filename)
-    inputs = data[:, :2]
-    outputs = data[:, 2]
-    interp = LinearNDInterpolator(inputs, outputs)
-    return interp
 
 
 def compute_mon(corr_level, corr_fact):
