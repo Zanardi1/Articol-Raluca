@@ -11,17 +11,17 @@
 |---------------------------------------------------------------------------------------------|-----------|
 | Factorul de corelare:                                                                       |     79.08 |
 | Randamentul de C3 la 400F, in % volumice:                                                   |     80.61 |
-| Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F:                    |      0.67 |
-| Randamentul de C5 la 400F, in % volumice:                                                   |     54.19 |
-| Randamentul de C3+C4 la 400F, in % volumice:                                                |     26.41 |
+| Raportul dintre randamentul de C5, la 400F si randamentul de C3 la 400F:                    |      0.70 |
+| Randamentul de C5 la 400F, in % volumice:                                                   |     56.72 |
+| Randamentul de C3+C4 la 400F, in % volumice:                                                |     23.88 |
 | Raportul dintre cantitatea totala de C4 si cantitatea totala de C3:                         |      1.68 |
-| Randamentul total de C3, in % volumice:                                                     |      9.85 |
-| Randamentul total de C4, in % volumice:                                                     |     16.57 |
-| Randamentul de propena, in % volumice:                                                      |      6.97 |
-| Randamentul de C3, mai putin propena:                                                       |      2.88 |
-| Randamentul de butena, in % volumice:                                                       |      8.39 |
-| Randamentul de butan, in % volumice:                                                        |      2.07 |
-| Randamentul de izobutan, in %volumice:                                                      |      6.10 |
+| Randamentul total de C3, in % volumice:                                                     |      8.90 |
+| Randamentul total de C4, in % volumice:                                                     |     14.98 |
+| Randamentul de propena, in % volumice:                                                      |      6.30 |
+| Randamentul de C3, mai putin propena:                                                       |      2.61 |
+| Randamentul de butena, in % volumice:                                                       |      7.59 |
+| Randamentul de butan, in % volumice:                                                        |      1.87 |
+| Randamentul de izobutan, in %volumice:                                                      |      5.52 |
 | Randamentul de cocs, C2 si hidrocarburi usoare:                                             |      7.29 |
 | Raportul dintre cantitatea de cocs si cantitatea totala de cocs, C2 si hidrocarburi usoare: |      0.68 |
 | Randamentul de cocs, in % volumice:                                                         |      4.93 |
@@ -32,7 +32,7 @@
 | Alimentarea cu etan:                                                                        |      0.80 |
 | Total in alimentare:                                                                        |      2.36 |
 | Raportul de H2S, in % volumice:                                                             |      0.17 |
-| Cantitatea de benzina, in % masice:                                                         |     44.75 |
+| Cantitatea de benzina, in % masice:                                                         |     46.84 |
 | Randamentul de ulei, in % volumice:                                                         |     26.16 |
 | Randamentul de ulei usor, in % volumice:                                                    |     20.00 |
 | Randamentul de ulei usor, in % masice:                                                      |     20.41 |
@@ -53,31 +53,31 @@ Tabelul 3:
 | Component         |   % vol |   Greutate specifica |   Randament calculat (% masa) |   Randament normalizat (% masa) |
 |-------------------|---------|----------------------|-------------------------------|---------------------------------|
 | Hidrogen          |    0.00 |                 0.00 |                          0.04 |                            0.04 |
-| Metan             |    0.00 |                 0.00 |                          0.97 |                            1.04 |
+| Metan             |    0.00 |                 0.00 |                          0.97 |                            1.03 |
 | Etena             |    0.00 |                 0.00 |                          0.54 |                            0.58 |
-| Etan              |    0.00 |                 0.00 |                          0.80 |                            0.86 |
-| Propena           |    6.97 |                 0.52 |                          3.64 |                            3.90 |
-| Propan            |    2.88 |                 0.51 |                          1.46 |                            1.57 |
-| Butena            |    8.39 |                 0.60 |                          5.05 |                            5.42 |
-| Izobutena         |    6.10 |                 0.56 |                          3.44 |                            3.69 |
-| Butan             |    2.07 |                 0.58 |                          1.21 |                            1.30 |
-| C5                |   54.19 |                 0.74 |                         44.75 |                           48.04 |
-| Ulei usor         |   20.00 |                 0.93 |                         20.41 |                           21.91 |
-| Ulei de decantare |    5.00 |                 1.03 |                          5.75 |                            6.17 |
-| Cocs              |    0.00 |                 0.00 |                          4.93 |                            5.29 |
+| Etan              |    0.00 |                 0.00 |                          0.80 |                            0.85 |
+| Propena           |    6.30 |                 0.52 |                          3.29 |                            3.50 |
+| Propan            |    2.61 |                 0.51 |                          1.32 |                            1.41 |
+| Butena            |    7.59 |                 0.60 |                          4.56 |                            4.86 |
+| Izobutena         |    5.52 |                 0.56 |                          3.11 |                            3.31 |
+| Butan             |    1.87 |                 0.58 |                          1.09 |                            1.17 |
+| C5                |   56.72 |                 0.74 |                         46.84 |                           49.92 |
+| Ulei usor         |   20.00 |                 0.93 |                         20.41 |                           21.75 |
+| Ulei de decantare |    5.00 |                 1.03 |                          5.75 |                            6.13 |
+| Cocs              |    0.00 |                 0.00 |                          4.93 |                            5.26 |
 | H2S               |    0.00 |                 0.00 |                          0.17 |                            0.18 |
-| Total             |  105.61 |                 0.79 |                         93.15 |                          100.00 |
+| Total             |  105.61 |                 0.79 |                         93.82 |                          100.00 |
 
 Tabelul 4: 
-| Component         |     A |         B |    C |       D |    E |       F |
-|-------------------|-------|-----------|------|---------|------|---------|
-| Benzina           | 44.75 | 179725.23 | 0.10 |  179.73 | 0.06 |  100.95 |
-| Ulei usor         | 20.41 |  81969.25 | 1.00 |  819.69 | 0.56 |  460.40 |
-| Ulei de decantare |  5.75 |  23081.30 | 2.50 |  577.03 | 1.40 |  324.10 |
-| Cocs              |  4.93 |  19808.96 | 2.50 |  495.22 | 1.40 |  278.15 |
-| Total             | 75.84 | 304584.74 | 0.00 | 2071.67 | 0.00 | 1163.61 |
-| Sulf in H2S       |  0.00 |      0.00 | 0.00 |    0.00 | 0.00 |  643.78 |
-| Total sulf        |  0.00 |      0.00 | 0.00 |    0.00 | 0.00 | 1807.38 |
+| Component         |     A |         B |    C |       D |    E |      F |
+|-------------------|-------|-----------|------|---------|------|--------|
+| Benzina           | 46.84 |  94055.83 | 0.10 |   94.06 | 0.06 |  52.62 |
+| Ulei usor         | 20.41 |  40984.62 | 1.00 |  409.85 | 0.56 | 229.27 |
+| Ulei de decantare |  5.75 |  11540.65 | 2.50 |  288.52 | 1.40 | 161.40 |
+| Cocs              |  4.93 |   9904.48 | 2.50 |  247.61 | 1.40 | 138.52 |
+| Total             | 77.92 | 156485.58 | 0.00 | 1040.03 | 0.00 | 581.80 |
+| Sulf in H2S       |  0.00 |      0.00 | 0.00 |    0.00 | 0.00 | 321.89 |
+| Total sulf        |  0.00 |      0.00 | 0.00 |    0.00 | 0.00 | 903.69 |
 
 A = Randament (% masice)
 B = Debit (lb/h)

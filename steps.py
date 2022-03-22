@@ -124,6 +124,7 @@ def step_22():
 def step_23():
     component = ['Benzina', 'Ulei usor', 'Ulei de decantare', 'Cocs', 'Total', 'Sulf in H2S', 'Total sulf']
     feed_rate = b.feed_rate * 7.491 * 42 / 24
+    feed_rate /= 2
     sulfur_in_feed = feed_rate * b.initial_sulfur_content / 100
     h2_s_yield = feed_rate * step_16(corr_factor=b.correlation_factor) / 100
     sulfur_in_h2_s = h2_s_yield * 32 / 34
