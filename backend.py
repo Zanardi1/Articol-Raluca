@@ -29,7 +29,7 @@ def read_input_file(filename, is_new_file=True):
         vabp = c.convert_c_to_f((data[2] + data[3] + data[4]) / 3)
         fsg = data[5]
         ap = interp_2d('Punct de anilina.txt')(vabp,fsg)
-        isc = data[6]F
+        isc = data[6]
         data = [flow_rate, conv, vabp, fsg, ap, isc]
     return data
 
